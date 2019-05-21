@@ -1,0 +1,10 @@
+const http = require('http');
+const routes = require('./routes');
+
+<<<<<<< HEAD
+const server = http.createServer(routes.handler);
+=======
+const serverasdasdass = http.createServer(routes.handler);
+>>>>>>> 7a51c7197830d3210a2dd800f7e3702d68c8326d
+
+server.listen(9990);
