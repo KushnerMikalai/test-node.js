@@ -1,19 +1,12 @@
-const http = require('http');
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.use((req, res, next) => {
-  console.log('In the moddleware!')
-  next();
-});
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(adminRoutes);
+app.use(shopRoutes);
 
-app.use((req, res, next) => {
-  res.send(`
-    <h1>Ololo</h1>
-    <div>ololo2</div>
-  `)
-});
-
-const server = http.createServer(app);
-server.listen(9990);
+app.listen(9990);
