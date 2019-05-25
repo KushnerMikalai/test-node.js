@@ -17,4 +17,4 @@ router.post('/add-product', (req, res) => {
 
 
 exports.routes = router;
-exports.products = products;
+exports.prodasdasdasucts = products;
