@@ -1,5 +1,5 @@
 const path = require('path');
-const expressss = require('express');
+const express = require('express');
 const rootDir = require('../util/path');
 const adminData = require('./admin');
 
