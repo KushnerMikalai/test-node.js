@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-html(lang="en")
-  head
-    meta(charset="UTF=8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
-    meta(name="viewport", content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no")
-    link(rel="stylesheet", href="/css/main.css")
-    link(rel="stylesheet", href="/css/product.css")
-  title #{docTitle}
-  body
-    header.main-header
-      nav.main-header__nav
-        ul.main-header__item-list
-          li.main-header__item
-            a.active(href="/") Shop
-          li.main-header__item
-            a.active(href="/admin/add-product") Add Product
-    main
-      .container
+extends layouts/main-layout.pug
+
+block styles
+  link(rel="stylesheet", href="/css/product.css")
+
+block content
+  main
+    .container
+      if prods.length > 0
         .row
           img(src="", alt="")
           each product in prods
@@ -25,4 +15,6 @@ html(lang="en")
                 header.card__header
                   .product-item__title #{product.title}
                 .card__image
-                   img(src="https://images.unsplash.com/photo-1558590987-5331428c4b17?ixlib=rb-1.2.1&auto=format&fit=crop&w=585&q=80", alt="")
+                  img(src="https://images.unsplash.com/photo-1558590987-5331428c4b17?ixlib=rb-1.2.1&auto=format&fit=crop&w=585&q=80", alt="")
+      else
+        h2 No product
