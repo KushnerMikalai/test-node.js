@@ -49,4 +49,5 @@ app.use((req, res, next) => {
 /**
  * listen server
  */
+console.log('http://localhost:9990');
 app.listen(9990);
