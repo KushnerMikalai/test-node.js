@@ -10,7 +10,7 @@ const app = express();
 /**
  * template engine
  */
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 /**
  * dir for views template engine
