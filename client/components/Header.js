@@ -9,7 +9,7 @@ export default () => (
   <Header>
     <nav>
       <Link href="/">
-        <a stylsssse={linkStyle}>Home</a>
+        <a style={linkStyle}>Home</a>
       </Link>
       <Link href="/about">
         <a style={linkStyle}>About</a>
