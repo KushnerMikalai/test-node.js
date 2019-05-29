@@ -13,7 +13,6 @@ exports.postAddProduct = (req, res, next) => {
   res.redirect('/')
 };
 
-
 exports.getProducts = (req, res, next) => {
   const products = Product.fetchAll();
   res.render('shop', {
