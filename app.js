@@ -4,6 +4,15 @@ const path = require('path');
 const errorController = require('./controllers/ErrorController');
 const app = express();
 
+/**
+ * check device
+ */
+// const device = require('express-device');
+// app.use(device.capture());
+// app.get('/hello',function(req,res) {
+//   res.send(req.device);
+// });
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
