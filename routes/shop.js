@@ -1,15 +1,12 @@
 const path = require('path');
 const express = require('express');
-const productsController = require('../controllers/ProductsController');
+const shopController = require('../controllers/ShopController');
 const router =  express.Router();
 
 
-router.get('/', (req, res, next) => {
-  res.render('shop/index', {
-    pageTitle: 'Panda Words',
-    path: '/'
-  })
-});
-// router.get('/', productsController.getProducts);
+router.get('/shop', shopController.getIndex);
+router.get('/shop/products', shopController.getProducts);
+router.get('/shop/cart', shopController.getCart);
+router.get('/shop/checkout', shopController.getCheckout);
 
 module.exports = router;
