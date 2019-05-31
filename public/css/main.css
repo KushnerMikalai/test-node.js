@@ -75,7 +75,10 @@ main {
 }
 
 .card__image {
+  display: block;
   width: 100%;
+  max-width: 70%;
+  margin: 0 auto;
 }
 
 .card__image img {
