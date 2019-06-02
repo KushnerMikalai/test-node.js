@@ -1,19 +1,11 @@
 import Link from 'next/Link'
 import styled from 'styled-components';
-
-const linkStyle = {
-  marginRight: 15
-};
-
+import Box from '@material-ui/core/Box';
 export default () => (
   <Header>
     <nav>
-      <Link href="/">
-        <a style={linkStyle}>Home</a>
-      </Link>
-      <Link href="/about">
-        <a style={linkStyle}>About</a>
-      </Link>
+      <Link href="/"><a>Home</a></Link>
+      <Link href="/about"><a>About</a></Link>
     </nav>
   </Header>
 );

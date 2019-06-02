@@ -3,8 +3,7 @@ import Header from '../components/Header'
 const Index = () => (
   <div>
     <Header />
-    <div style={{ color: 'red' }}>Hello Next.js</div>
-
+    <div>Hello Next.js</div>
   </div>
 );
 
