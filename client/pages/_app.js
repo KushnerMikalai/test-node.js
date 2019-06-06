@@ -4,7 +4,7 @@ import "../assets/scss/style.scss"
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
-    let pageProps = {}
+    let pageProps = {};
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
@@ -14,7 +14,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps } = this.props;
 
     return (
       <Container>
