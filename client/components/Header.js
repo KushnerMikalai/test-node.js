@@ -1,6 +1,6 @@
 import Link from 'next/Link'
 import styled from 'styled-components';
-import Box from '@material-ui/core/Box';
+
 export default () => (
   <Header>
     <nav>
