@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const errorController = require('./controllers/ErrorController');
+const db = require('./util/database');
 const app = express();
-
 /**
  * check device
  */
@@ -16,7 +16,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const adminRoutes = require('./routes/admin');

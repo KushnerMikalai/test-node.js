@@ -20,6 +20,7 @@
     "express": "^4.16.4",
     "express-device": "^0.4.2",
     "lodash": "^4.17.11",
+    "mysql2": "^1.6.5",
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
