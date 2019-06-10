@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const errorController = require('./controllers/ErrorController');
-const db = require('./util/database');
 const app = express();
+
+const mongoConnect = require('./util/database').mongoConnect;
 /**
  * check device
  */
@@ -19,9 +20,9 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const pagesRoutes = require('./routes/pages');
+const adminRoutes = require('./routes/AdminRoutes');
+const shopRoutes = require('./routes/ShopRoutes');
+const pagesRoutes = require('./routes/PagesRoutes');
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
@@ -30,4 +31,7 @@ app.use(pagesRoutes);
 app.use(errorController.get404);
 
 console.log('http://localhost:9990');
-app.listen(9990);
+
+mongoConnect(() => {
+  app.listen(9990)
+});
