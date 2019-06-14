@@ -11,11 +11,11 @@
           <li>
             <div class="d-flex align-items-center">
               <p>
-                <span><%= product.productData.title %> (x<%= product.qty%>) = </span>
-                <span style="color: #ff8379;">$<%= product.productData.price * product.qty %></span>
+                <span><%= product.productId.title %> (x<%= product.quantity %>) = </span>
+                <span style="color: #ff8379;">$<%= product.productId.price * product.quantity %></span>
               </p>
               <form class="m-l-2" action="/cart-delete-item" method="POST">
-                <input type="hidden" value="<%= product.productData.id %>" name="productId">
+                <input type="hidden" value="<%= product.productId._id %>" name="productId">
                 <button class="btn" type="submit">Delete</button>
               </form>
             </div>
@@ -23,6 +23,9 @@
           </li>
         <% }) %>
       </ul>
+      <form action="/create-order" method="POST">
+        <button class="btn" type="submit">Order Now!</button>
+      </form>
     <% } else { %>
       <p>No Products in Cart!</p>
     <% } %>

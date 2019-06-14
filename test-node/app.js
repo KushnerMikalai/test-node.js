@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const path = require('path');
 const errorController = require('./controllers/ErrorController');
 const app = express();
 
-const mongoConnect = require('./util/database').mongoConnect;
+const User = require('./models/UserModel');
+
 /**
  * check device
  */
@@ -24,6 +26,15 @@ const adminRoutes = require('./routes/AdminRoutes');
 const shopRoutes = require('./routes/ShopRoutes');
 const pagesRoutes = require('./routes/PagesRoutes');
 
+app.use((req, res, next) => {
+  User.findById('5d037e60edaacd06c852a8d8')
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => console.log(err));
+});
+
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(pagesRoutes);
@@ -32,6 +43,25 @@ app.use(errorController.get404);
 
 console.log('http://localhost:9990');
 
-mongoConnect(() => {
-  app.listen(9990)
-});
+mongoose
+  .connect(
+    'mongodb+srv://nickolaikushner:RW3pPvCjGrN9UaE@cluster0-7gsrc.mongodb.net/shop?retryWrites=true&w=majority'
+  )
+  .then(result => {
+    User.findOne().then(user => {
+      if (!user) {
+        const user = new User({
+          name: 'Nick',
+          email: 'kushner.of.by@yandex.ru',
+          cart: {
+            items: [],
+          },
+        });
+        user.save();
+      }
+    });
+    app.listen(9990);
+  })
+  .catch(err => {
+    console.log(err);
+  });
