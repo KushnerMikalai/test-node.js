@@ -1,5 +1,5 @@
-import Layout from '../components/layout/default'
-import Head from 'next/head'
+import Layout from '../components/layout/default';
+import Head from 'next/head';
 import Link from 'next/link';
 
 const Index = props => (
@@ -22,16 +22,15 @@ const Index = props => (
   </Layout>
 );
 
-Index.getInitialProps = async function () {
+Index.getInitialProps = async function() {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const data = await res.json();
 
   console.log(`Show data fetched. Count: ${data.length}`);
 
   return {
-    posts: data.map(post => post)
+    posts: data.map(post => post),
   };
 };
 
-
-export default Index
+export default Index;
