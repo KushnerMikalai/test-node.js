@@ -1,15 +1,19 @@
-import Link from 'next/Link'
-import styled from 'styled-components';
+import Link from "next/link";
+import styled from "styled-components";
 
 export default () => (
-  <Container>
-    <Header>
-      <nav>
-        <Link href="/"><a>Home</a></Link>
-        <Link href="/about"><a>About</a></Link>
-      </nav>
-    </Header>
-  </Container>
+  <Header>
+    <Container>
+      <Nav>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+      </Nav>
+    </Container>
+  </Header>
 );
 
 const Container = styled.div`
@@ -21,4 +25,8 @@ const Container = styled.div`
 
 const Header = styled.header`
   padding: 1rem 0;
+`;
+
+const Nav = styled.nav`
+  margin: 0 -1rem;
 `;

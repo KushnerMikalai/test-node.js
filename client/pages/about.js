@@ -1,10 +1,10 @@
-import Header from "../components/Header";
+import fetch from 'isomorphic-unfetch';
+import Layout from '../components/layout/default'
 
 export default function About() {
   return (
-    <div>
-      <Header />
-      <p>This is the about page</p>
-    </div>
+    <Layout>
+      <p>About</p>
+    </Layout>
   );
 }
