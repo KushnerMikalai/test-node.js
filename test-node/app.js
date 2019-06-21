@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const adminRoutes = require('./routes/AdminRoutes');
 const shopRoutes = require('./routes/ShopRoutes');
 const pagesRoutes = require('./routes/PagesRoutes');
+const authRoutes = require('./routes/AuthRoutes');
 
 app.use((req, res, next) => {
   User.findById('5d037e60edaacd06c852a8d8')
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(pagesRoutes);
+app.use(authRoutes);
 
 app.use(errorController.get404);
 

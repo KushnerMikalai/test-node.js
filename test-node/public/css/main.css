@@ -51,8 +51,10 @@ main {
 
 .main-header__nav {
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .main-header__item-list {
@@ -102,9 +104,7 @@ main {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
-  -ms-flex-preferred-size: 0;
   flex-basis: 0;
-  -ms-flex-positive: 1;
   flex-grow: 1;
   max-width: 100%;
 }
