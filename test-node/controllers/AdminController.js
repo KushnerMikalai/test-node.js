@@ -5,7 +5,7 @@ exports.getAddProduct = (req, res, next) => {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
     editing: false,
-    isAuthenticated: req.isLoggedIn,
+    isAuthenticated: req.session.isLoggedIn,
   });
 };
 
@@ -14,7 +14,6 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-
   const product = new Product({
     title: title,
     price: price,
@@ -22,8 +21,9 @@ exports.postAddProduct = (req, res, next) => {
     imageUrl: imageUrl,
     userId: req.user,
   });
-  product.save();
-  res.redirect('/');
+  product.save().then(() => {
+    res.redirect('/');
+  });
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -44,7 +44,7 @@ exports.getEditProduct = (req, res, next) => {
         path: '/admin/edit-product',
         editing: editMode,
         product: product,
-        isAuthenticated: req.isLoggedIn,
+        isAuthenticated: req.session.isLoggedIn,
       });
     })
     .catch(err => {
@@ -76,18 +76,15 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.find()
-    // .select('title price -_id')
-    // .populate('userId', 'name')
-    .then(products => {
-      res.render('admin/products', {
-        prods: products,
-        pageTitle: 'Admin Products',
-        hasProducts: products.length > 0,
-        path: '/admin/products',
-        isAuthenticated: req.isLoggedIn,
-      });
+  Product.find().then(products => {
+    res.render('admin/products', {
+      prods: products,
+      pageTitle: 'Admin Products',
+      hasProducts: products.length > 0,
+      path: '/admin/products',
+      isAuthenticated: req.session.isLoggedIn,
     });
+  });
 };
 
 exports.postDeleteProduct = (req, res, next) => {

@@ -1,11 +1,23 @@
+const path = require('path');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const path = require('path');
-const errorController = require('./controllers/ErrorController');
-const app = express();
 
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const errorController = require('./controllers/ErrorController');
 const User = require('./models/UserModel');
+
+const MONGODB_URI =
+  'mongodb+srv://nickolaikushner:RW3pPvCjGrN9UaE@cluster0-7gsrc.mongodb.net/shop';
+
+const app = express();
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: 'sessions',
+});
 
 /**
  * check device
@@ -21,20 +33,31 @@ app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-const adminRoutes = require('./routes/AdminRoutes');
-const shopRoutes = require('./routes/ShopRoutes');
-const pagesRoutes = require('./routes/PagesRoutes');
-const authRoutes = require('./routes/AuthRoutes');
+app.use(
+  session({
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+);
 
 app.use((req, res, next) => {
-  User.findById('5d037e60edaacd06c852a8d8')
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
     .then(user => {
       req.user = user;
       next();
     })
     .catch(err => console.log(err));
 });
+
+const adminRoutes = require('./routes/AdminRoutes');
+const shopRoutes = require('./routes/ShopRoutes');
+const pagesRoutes = require('./routes/PagesRoutes');
+const authRoutes = require('./routes/AuthRoutes');
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
@@ -46,9 +69,7 @@ app.use(errorController.get404);
 console.log('http://localhost:9990');
 
 mongoose
-  .connect(
-    'mongodb+srv://nickolaikushner:RW3pPvCjGrN9UaE@cluster0-7gsrc.mongodb.net/shop?retryWrites=true&w=majority'
-  )
+  .connect(MONGODB_URI)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
