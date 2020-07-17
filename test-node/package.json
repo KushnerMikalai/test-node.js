@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "express-device": "^0.4.2",
     "express-session": "^1.16.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.15",
     "nodemailer": "^6.2.1",
